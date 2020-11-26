@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt=br">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>calculadora Historica</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> 
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head> 
+<body>
+    <div class="container" id="app">
+        <form>
+                <div class="form-group">
+                    <label for="numero1">Primeiro número:</label>
+                    <input  class="form-control" type="text" id="numero1" name="numero1" v-model.number="numero1"/>
+                </div>
+
+                <select  class="form-control" v-model ="operacao">
+                    <option value =" ">Selecione</option>
+                    <option value ="+">+</option>
+                    <option value ="-">-</option>
+                    <option value ="*">*</option>
+                    <option value ="/">/</option>
+                </select v-model="operacao"> 
+
+                <div class="form-group">
+                    <label for="numero2">Segundo número:</label>
+                    <input class="form-control" type="text" id="numero2" name="numero2" v-model.number="numero2"/>
+                </div>
+                
+                    <button class="btn btn-primary btn-block" v-on:click.prevent="calcular()">Calcular</button>
+       
+                <div class="form-group">
+                    <label for="resultado">Resultado:</label>
+                    <input class="form-control" type="text" id="resultado" name="resultado" v-model="resultado"/>
+                </div>
+
+                <ul>
+                   <li v-for="item in historico">{{item}}</li>
+                </ul> 
+            </form>
+    </div>
+        <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                numero1: 0,
+                numero2: 0,
+                operacao:' ',
+                resultado: 0,
+                historico: []
+
+            },
+            methods: {
+                calcular: function() {
+                     switch(this.operacao) {
+                        case '+':
+                            this.resultado = this.numero1 + this.numero2;
+                            var conta = this.numero1 + '+' + this.numero2 + '=' + this.resultado;
+                            break;
+                        case '-':
+                            this.resultado = this.numero1 - this.numero2;
+                            var conta = this.numero1 + '-' + this.numero2 + '=' + this.resultado;
+                            break;
+                        case '*':
+                            this.resultado = this.numero1 * this.numero2;
+                            var conta = this.numero1 + '*' + this.numero2 + '=' + this.resultado;
+                            break;
+                        case '/':
+                            this.resultado = this.numero1 / this.numero2;
+                            var conta = this.numero1 + '/' + this.numero2 + '=' + this.resultado;
+                            break;
+                            this.hitorico.push(conta);
+                        default:
+                            break;
+                      }
+                   } 
+                }
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
+
